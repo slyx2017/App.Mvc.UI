@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>layout 后台大布局 - Layui</title>
     <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <style rel="stylesheet" type="text/css">
+        .layui-tab-title li:first-child > i {
+            display: none;
+        }
+    </style>
 </head>
 <body class="layui-layout-body">
     <div class="layui-layout layui-layout-admin">
@@ -49,9 +54,11 @@
 
         <div class="layui-body">
             <!-- 内容主体区域 -->
-            <div class="layui-tab" lay-filter="demo" lay-allowclose="true">
-                <ul id="tabTitle" class="layui-tab-title"></ul>
-                <div id="tabContainers" class="layui-tab-content">
+            <div class="layui-tab" lay-filter="tab-switch" lay-allowclose="true">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">首页</li>
+                </ul>
+                <div class="layui-tab-content">
                     @RenderBody()
                 </div>
             </div>
@@ -68,66 +75,8 @@
     </ul>
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Content/layui/layui.js"></script>
+    <script src="~/Scripts/myJs/index.js"></script>
     @RenderSection("scripts", required: false)
-    <script>
-        //调整iframe高度
-        function reinitIframe() {
-            var iframes = document.getElementsByName("iframe");
-            try {
-                for (var i = 0; i < iframes.length; i++)
-                    //iframes[i].height = iframes[i].contentWindow.document.documentElement.scrollHeight;
-                    iframes[i].height = window.screen.height - 280;
-            } catch (ex) { }
-        }
 
-        window.setInterval("reinitIframe()", 200);
-        //JavaScript代码区域
-        layui.use('element', function () {
-            var $ = layui.jquery, element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
-
-            var active = {
-                tabAdd: function (url, id, name) {
-                    //新增一个Tab项
-                    element.tabAdd('demo', {
-                        title: name //用于演示
-                      , content: '<iframe frameborder="0" name="iframe" scrolling="no" width="100%" src="' + url + '"></iframe>'
-                      , id: id //实际使用一般是规定好的id，这里以时间戳模拟下
-                    });
-                    //增加点击关闭事件
-                    var r = $("#tabTitle").find("li");
-                    //每次新打开tab都是最后一个，所以只对最后一个tab添加点击关闭事件
-                    r.eq(r.length - 1).children("i.layui-tab-close").on("click", function () {
-                        element.tabDelete("demo", $(this).parent("li").index());
-                    }), element.tabChange("demo", r.length - 1);
-                    element.init();
-                }
-                      , tabChange: function (id) {
-                          //切换到指定Tab项
-                          element.tabChange('demo', id); //切换到：用户管理
-                      }
-                        , tabDelete: function (id) {
-                            element.tabDelete("demo", id);//删除
-                        }
-            };
-
-            $("a[name='a']").click(function () {
-                var dataid = $(this);
-                if ($(".layui-tab-title li[lay-id]").length <= 0) {
-                    active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"), dataid.text());
-                } else {
-                    var isData = false;
-                    $.each($(".layui-tab-title li[lay-id]"), function () {
-                        if ($(this).attr("lay-id") == dataid.attr("data-id")) {
-                            isData = true;
-                        }
-                    })
-                    if (isData == false) {
-                        active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"), dataid.text());
-                    }
-                }
-                active.tabChange(dataid.attr("data-id"));
-            })
-        });
-    </script>
 </body>
 </html>

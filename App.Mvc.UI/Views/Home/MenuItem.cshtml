@@ -5,25 +5,48 @@
     var menuitem = Model.Where(a => a.Menu_ParentID == null).OrderBy(a => a.Menu_Order);
     if (menuitem != null && menuitem.Count() > 0)
     {
-        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+        var i = 0;
+        <ul class="layui-nav layui-nav-tree" lay-filter="left-menu">
             @foreach (var item in menuitem)
+            {
+                if (i == 0)
                 {
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">@item.Menu_Name</a>
-                    @{
-                        var childmenu = Model.Where(a => a.Menu_ParentID == item.Menu_ID).OrderBy(a => a.Menu_Order);
-                        if (childmenu != null && childmenu.Count() > 0)
-                        {
-                            <dl class="layui-nav-child">
-                                @foreach (var childitem in childmenu)
-                                {
-                                    <dd><a name="a" href="#" data-url="@childitem.Menu_Url" data-id="@childitem.Menu_ID">@childitem.Menu_Name</a></dd>
-                                }
-                            </dl>
+                    i++;
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a class="" href="javascript:;"><i class="layui-icon" style="margin-right: 5px">&#xe620;</i>@item.Menu_Name</a>
+                        @{
+                            var childmenu = Model.Where(a => a.Menu_ParentID == item.Menu_ID).OrderBy(a => a.Menu_Order);
+                            if (childmenu != null && childmenu.Count() > 0)
+                            {
+                                <dl class="layui-nav-child">
+                                    @foreach (var childitem in childmenu)
+                                    {
+                                        <dd id="@childitem.Menu_ID" name="@childitem.Menu_Url"><a href="javascript:;">@childitem.Menu_Name</a></dd>
+                                    }
+                                </dl>
+                            }
                         }
-                    }
-                </li>
+                    </li>
+                }
+                else
+                {
+                    <li class="layui-nav-item">
+                        <a class="" href="javascript:;"><i class="layui-icon" style="margin-right: 5px">&#xe620;</i>@item.Menu_Name</a>
+                        @{
+                            var childmenu = Model.Where(a => a.Menu_ParentID == item.Menu_ID).OrderBy(a => a.Menu_Order);
+                            if (childmenu != null && childmenu.Count() > 0)
+                            {
+                                <dl class="layui-nav-child">
+                                    @foreach (var childitem in childmenu)
+                                    {
+                                        <dd id="@childitem.Menu_ID" name="@childitem.Menu_Url"><a href="javascript:;">@childitem.Menu_Name</a></dd>
+                                    }
+                                </dl>
+                            }
                         }
+                    </li>
+                }
+                                        }
         </ul>
-                        }
+                                        }
 }
