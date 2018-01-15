@@ -1,0 +1,30 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ include file="EF.Utility.CS.ttinclude"#>
+<#@ output extension=".cs" #>
+<# CodeGenerationTools code = new CodeGenerationTools(this);
+MetadataLoader loader = new MetadataLoader(this);
+CodeRegion region = new CodeRegion(this, 1);
+MetadataTools ef = new MetadataTools(this);
+string inputFile = @"..\\App.Mvc.Model\\MKDBContext.edmx";
+EdmItemCollection ItemCollection = loader.CreateEdmItemCollection(inputFile);
+string namespaceName = code.VsNamespaceSuggestion();
+EntityFrameworkTemplateFileManager fileManager = EntityFrameworkTemplateFileManager.Create(this);
+#>
+using App.Mvc.IRepository;
+using App.Mvc.Model.Models;
+using App.Mvc.Repository.Base;
+namespace App.Mvc.Repository
+{
+<#
+    //使用foreach循环遍历ItemCollection.GetItems<EntityType>集合
+
+    foreach(EntityType entity in ItemCollection.GetItems<EntityType>().OrderBy(e=>e.Name))
+
+    { #>
+        public partial class <#=entity.Name#>Repository : BaseRepository<<#=entity.Name#>>, I<#=entity.Name#>Repository
+		{
+
+		}
+<#}#>
+
+}

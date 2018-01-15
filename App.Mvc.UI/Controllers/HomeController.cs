@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App.Mvc.IServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +9,23 @@ namespace App.Mvc.UI.Controllers
 {
     public class HomeController : Controller
     {
+        IMenuServices menuService;
+        public HomeController(IMenuServices menuService)
+        {
+            this.menuService = menuService;
+        }
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult About()
+        public ActionResult MenuItem()
         {
-            ViewBag.Message = "Your application description page.";
+            #region 得到菜单
+            
+            var menuList = menuService.QueryWhere(m=>m.Menu_ID>0);
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            #endregion
+            return PartialView(menuList);
         }
     }
 }

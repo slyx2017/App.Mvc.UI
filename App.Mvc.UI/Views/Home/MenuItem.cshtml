@@ -1,0 +1,29 @@
+﻿
+@using App.Mvc.Model.Models
+@model IEnumerable<Menu>
+@{
+    var menuitem = Model.Where(a => a.Menu_ParentID == null).OrderBy(a => a.Menu_Order);
+    if (menuitem != null && menuitem.Count() > 0)
+    {
+        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+            @foreach (var item in menuitem)
+                {
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">@item.Menu_Name</a>
+                    @{
+                        var childmenu = Model.Where(a => a.Menu_ParentID == item.Menu_ID).OrderBy(a => a.Menu_Order);
+                        if (childmenu != null && childmenu.Count() > 0)
+                        {
+                            <dl class="layui-nav-child">
+                                @foreach (var childitem in childmenu)
+                                {
+                                    <dd><a name="a" href="#" data-url="@childitem.Menu_Url" data-id="@childitem.Menu_ID">@childitem.Menu_Name</a></dd>
+                                }
+                            </dl>
+                        }
+                    }
+                </li>
+                        }
+        </ul>
+                        }
+}

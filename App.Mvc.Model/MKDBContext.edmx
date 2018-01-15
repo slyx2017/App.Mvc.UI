@@ -1,0 +1,1373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DDitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Base.Button”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Button">
+          <Key>
+            <PropertyRef Name="Button_ID" />
+            <PropertyRef Name="Button_Name" />
+          </Key>
+          <Property Name="Button_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Button_OpID" Type="nvarchar" MaxLength="100" />
+          <Property Name="Button_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Button_Operation" Type="nvarchar" MaxLength="100" />
+          <Property Name="Button_Magic" Type="nvarchar" MaxLength="100" />
+          <Property Name="Button_Describe" Type="nvarchar" MaxLength="100" />
+          <Property Name="Create_Time" Type="datetime" />
+          <Property Name="Update_Time" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Base.Dictionary”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Dictionary">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="DicCategoryID" />
+            <PropertyRef Name="DicValue" />
+            <PropertyRef Name="Enabled" />
+            <PropertyRef Name="Create_Time" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DicCategoryID" Type="int" Nullable="false" />
+          <Property Name="DicValue" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Create_Time" Type="datetime" Nullable="false" />
+          <Property Name="Update_Time" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Base.DictionaryCategory”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="DictionaryCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Category" />
+            <PropertyRef Name="Enabled" />
+            <PropertyRef Name="Create_Time" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Create_Time" Type="datetime" Nullable="false" />
+          <Property Name="Update_Time" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Base.LoginLog”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="LoginLog">
+          <Key>
+            <PropertyRef Name="Login_ID" />
+            <PropertyRef Name="Login_Name" />
+            <PropertyRef Name="Login_Nicker" />
+            <PropertyRef Name="Login_IP" />
+            <PropertyRef Name="Login_Time" />
+          </Key>
+          <Property Name="Login_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Login_Nicker" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Login_IP" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Login_Time" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Base.Menu”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Menu_ID" />
+            <PropertyRef Name="Menu_Name" />
+            <PropertyRef Name="Menu_Order" />
+          </Key>
+          <Property Name="Menu_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Menu_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Menu_Url" Type="nvarchar" MaxLength="200" />
+          <Property Name="Menu_ParentID" Type="int" />
+          <Property Name="Menu_Order" Type="int" Nullable="false" />
+          <Property Name="Menu_Icon" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsVisible" Type="int" />
+          <Property Name="Create_Time" Type="datetime" />
+          <Property Name="Update_Time" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Base.Menu_Button”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Menu_Button">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Menu_ID" Type="int" />
+          <Property Name="Button_ID" Type="int" />
+          <Property Name="OrderBy" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Base.Message”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageID" />
+            <PropertyRef Name="MessageTitle" />
+            <PropertyRef Name="MessageText" />
+            <PropertyRef Name="SendUser" />
+            <PropertyRef Name="RecUser" />
+            <PropertyRef Name="SendTime" />
+            <PropertyRef Name="IsSendEmail" />
+          </Key>
+          <Property Name="MessageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageTitle" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="MessageText" Type="varchar(max)" Nullable="false" />
+          <Property Name="SendUser" Type="int" Nullable="false" />
+          <Property Name="RecUser" Type="varchar(max)" Nullable="false" />
+          <Property Name="SendTime" Type="datetime" Nullable="false" />
+          <Property Name="ExpirationTime" Type="datetime" />
+          <Property Name="IsSendEmail" Type="bit" Nullable="false" />
+          <Property Name="SendEmailState" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Base.Role”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+            <PropertyRef Name="Role_Name" />
+            <PropertyRef Name="Create_Time" />
+          </Key>
+          <Property Name="Role_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Role_Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Create_Time" Type="datetime" Nullable="false" />
+          <Property Name="Update_Time" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Base.Role_Button”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Role_Button">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role_ID" Type="int" />
+          <Property Name="Menu_ID" Type="int" />
+          <Property Name="Button_ID" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Base.Role_Menu”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Role_Menu">
+          <Key>
+            <PropertyRef Name="RoleMenu_ID" />
+            <PropertyRef Name="Role_ID" />
+            <PropertyRef Name="Menu_ID" />
+          </Key>
+          <Property Name="RoleMenu_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role_ID" Type="int" Nullable="false" />
+          <Property Name="Menu_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Base.SystemInfo”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="SystemInfo">
+          <Key>
+            <PropertyRef Name="System_ID" />
+          </Key>
+          <Property Name="System_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="System_Title" Type="nvarchar" MaxLength="100" />
+          <Property Name="System_Version" Type="nvarchar" MaxLength="50" />
+          <Property Name="System_Copyright" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsValidCode" Type="bit" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Base.User_Message”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="User_Message">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="MessageID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="IsRead" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="IsRead" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Base.User_Role”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="User_Role">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="User_ID" />
+            <PropertyRef Name="Role_ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="Role_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Base.UserInfomation”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="UserInfomation">
+          <Key>
+            <PropertyRef Name="User_ID" />
+            <PropertyRef Name="User_Name" />
+            <PropertyRef Name="User_Password" />
+            <PropertyRef Name="User_Reallyname" />
+            <PropertyRef Name="Department_ID" />
+            <PropertyRef Name="IsEnable" />
+            <PropertyRef Name="Create_Time" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="User_Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="User_Reallyname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MobilePhone" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="HeadPortrait" Type="nvarchar" MaxLength="500" />
+          <Property Name="Department_ID" Type="int" Nullable="false" />
+          <Property Name="IsEnable" Type="bit" Nullable="false" />
+          <Property Name="Create_Time" Type="datetime" Nullable="false" />
+          <Property Name="Update_Time" Type="datetime" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Flow.ActiveCondition”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="ActiveCondition">
+          <Key>
+            <PropertyRef Name="ConditionId" />
+          </Key>
+          <Property Name="ConditionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActiveId" Type="int" />
+          <Property Name="FlowId" Type="int" />
+          <Property Name="ConditionIndex" Type="int" />
+          <Property Name="Field" Type="varchar" MaxLength="100" />
+          <Property Name="Compare" Type="varchar" MaxLength="100" />
+          <Property Name="CompareValue" Type="varchar" MaxLength="200" />
+          <Property Name="Logic" Type="varchar" MaxLength="50" />
+          <Property Name="Combine" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Flow.FlowActive”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="FlowActive">
+          <Key>
+            <PropertyRef Name="ActiveId" />
+            <PropertyRef Name="FlowId" />
+          </Key>
+          <Property Name="ActiveId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FlowId" Type="int" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="50" />
+          <Property Name="Viewfrom" Type="varchar" MaxLength="100" />
+          <Property Name="Viewto" Type="varchar" MaxLength="100" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="FlowLineName" Type="varchar" MaxLength="100" />
+          <Property Name="alt" Type="bit" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Flow.FlowApprove”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="FlowApprove">
+          <Key>
+            <PropertyRef Name="ApproveId" />
+          </Key>
+          <Property Name="ApproveId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FlowInfoId" Type="int" />
+          <Property Name="ApproveUser" Type="varchar" MaxLength="100" />
+          <Property Name="FlowStepId" Type="int" />
+          <Property Name="ApproveResult" Type="int" />
+          <Property Name="ApproveRemark" Type="varchar" MaxLength="200" />
+          <Property Name="ApproveTime" Type="datetime" />
+          <Property Name="ReallyApproveUser" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Flow.FlowInfo”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="FlowInfo">
+          <Key>
+            <PropertyRef Name="FlowInfoId" />
+          </Key>
+          <Property Name="FlowInfoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FlowId" Type="int" />
+          <Property Name="FormId" Type="int" />
+          <Property Name="FormInfoId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="FlowStepId" Type="int" />
+          <Property Name="FlowInfoState" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Flow.FlowStep”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="FlowStep">
+          <Key>
+            <PropertyRef Name="StepId" />
+          </Key>
+          <Property Name="StepId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FlowId" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="Viewleft" Type="int" />
+          <Property Name="Viewtop" Type="int" />
+          <Property Name="type" Type="varchar" MaxLength="100" />
+          <Property Name="width" Type="int" />
+          <Property Name="height" Type="int" />
+          <Property Name="alt" Type="bit" />
+          <Property Name="stepUser" Type="varchar" MaxLength="100" />
+          <Property Name="stepName" Type="varchar" MaxLength="100" />
+          <Property Name="flowNodeName" Type="varchar" MaxLength="100" />
+          <Property Name="remark" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Flow.WorkFlow”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="WorkFlow">
+          <Key>
+            <PropertyRef Name="FlowID" />
+          </Key>
+          <Property Name="FlowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FlowSort" Type="int" />
+          <Property Name="FlowName" Type="varchar" MaxLength="50" />
+          <Property Name="FormID" Type="int" />
+          <Property Name="remark" Type="varchar" MaxLength="100" />
+          <Property Name="CreateUser" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Form.ElementInfo”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="ElementInfo">
+          <Key>
+            <PropertyRef Name="ElementId" />
+          </Key>
+          <Property Name="ElementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ElementText" Type="varchar" MaxLength="50" />
+          <Property Name="ElementIoc" Type="varchar" MaxLength="100" />
+          <Property Name="ElementType" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Form.Form_Element”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Form_Element">
+          <Key>
+            <PropertyRef Name="FEId" />
+            <PropertyRef Name="FormId" />
+          </Key>
+          <Property Name="FEId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormId" Type="int" Nullable="false" />
+          <Property Name="ElementId" Type="int" />
+          <Property Name="FieldIden" Type="varchar" MaxLength="50" />
+          <Property Name="ElementLable" Type="varchar" MaxLength="50" />
+          <Property Name="ElementValid" Type="varchar" MaxLength="50" />
+          <Property Name="ElementHeight" Type="varchar" MaxLength="50" />
+          <Property Name="ElementDefValue" Type="varchar" MaxLength="200" />
+          <Property Name="DataDictionary" Type="int" />
+          <Property Name="ElementFormatType" Type="varchar" MaxLength="50" />
+          <Property Name="ElementOrder" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Form.FormInfo”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="FormInfo">
+          <Key>
+            <PropertyRef Name="FormId" />
+            <PropertyRef Name="FormName" />
+            <PropertyRef Name="DBName" />
+            <PropertyRef Name="FieldKey" />
+          </Key>
+          <Property Name="FormId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DBName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FieldKey" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="remark" Type="varchar" MaxLength="500" />
+          <Property Name="CreatTime" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Test.LeaveInfo”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="LeaveInfo">
+          <Key>
+            <PropertyRef Name="leaveId" />
+          </Key>
+          <Property Name="leaveId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="leavePeople" Type="varchar" MaxLength="50" />
+          <Property Name="leaveDepartment" Type="int" />
+          <Property Name="leaveDays" Type="int" />
+          <Property Name="leaveStartDate" Type="date" />
+          <Property Name="leaveEndDate" Type="date" />
+          <Property Name="remark" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DDit.Test.New”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="New">
+          <Key>
+            <PropertyRef Name="NewId" />
+          </Key>
+          <Property Name="NewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewTitle" Type="varchar" MaxLength="50" />
+          <Property Name="NewContent" Type="varchar" MaxLength="200" />
+          <Property Name="NewAuthor" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="DDitModelStoreContainer">
+          <EntitySet Name="Button" EntityType="Self.Button" store:Type="Tables" store:Schema="Base">
+            <DefiningQuery>SELECT 
+    [Button].[Button_ID] AS [Button_ID], 
+    [Button].[Button_OpID] AS [Button_OpID], 
+    [Button].[Button_Name] AS [Button_Name], 
+    [Button].[Button_Operation] AS [Button_Operation], 
+    [Button].[Button_Magic] AS [Button_Magic], 
+    [Button].[Button_Describe] AS [Button_Describe], 
+    [Button].[Create_Time] AS [Create_Time], 
+    [Button].[Update_Time] AS [Update_Time]
+    FROM [Base].[Button] AS [Button]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Dictionary" EntityType="Self.Dictionary" store:Type="Tables" store:Schema="Base">
+            <DefiningQuery>SELECT 
+    [Dictionary].[ID] AS [ID], 
+    [Dictionary].[DicCategoryID] AS [DicCategoryID], 
+    [Dictionary].[DicValue] AS [DicValue], 
+    [Dictionary].[Enabled] AS [Enabled], 
+    [Dictionary].[Create_Time] AS [Create_Time], 
+    [Dictionary].[Update_Time] AS [Update_Time]
+    FROM [Base].[Dictionary] AS [Dictionary]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DictionaryCategory" EntityType="Self.DictionaryCategory" store:Type="Tables" store:Schema="Base">
+            <DefiningQuery>SELECT 
+    [DictionaryCategory].[ID] AS [ID], 
+    [DictionaryCategory].[Category] AS [Category], 
+    [DictionaryCategory].[Enabled] AS [Enabled], 
+    [DictionaryCategory].[Create_Time] AS [Create_Time], 
+    [DictionaryCategory].[Update_Time] AS [Update_Time]
+    FROM [Base].[DictionaryCategory] AS [DictionaryCategory]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="LoginLog" EntityType="Self.LoginLog" store:Type="Tables" store:Schema="Base">
+            <DefiningQuery>SELECT 
+    [LoginLog].[Login_ID] AS [Login_ID], 
+    [LoginLog].[Login_Name] AS [Login_Name], 
+    [LoginLog].[Login_Nicker] AS [Login_Nicker], 
+    [LoginLog].[Login_IP] AS [Login_IP], 
+    [LoginLog].[Login_Time] AS [Login_Time]
+    FROM [Base].[LoginLog] AS [LoginLog]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Menu" EntityType="Self.Menu" store:Type="Tables" store:Schema="Base">
+            <DefiningQuery>SELECT 
+    [Menu].[Menu_ID] AS [Menu_ID], 
+    [Menu].[Menu_Name] AS [Menu_Name], 
+    [Menu].[Menu_Url] AS [Menu_Url], 
+    [Menu].[Menu_ParentID] AS [Menu_ParentID], 
+    [Menu].[Menu_Order] AS [Menu_Order], 
+    [Menu].[Menu_Icon] AS [Menu_Icon], 
+    [Menu].[IsVisible] AS [IsVisible], 
+    [Menu].[Create_Time] AS [Create_Time], 
+    [Menu].[Update_Time] AS [Update_Time]
+    FROM [Base].[Menu] AS [Menu]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Menu_Button" EntityType="Self.Menu_Button" store:Type="Tables" store:Schema="Base">
+            <DefiningQuery>SELECT 
+    [Menu_Button].[ID] AS [ID], 
+    [Menu_Button].[Menu_ID] AS [Menu_ID], 
+    [Menu_Button].[Button_ID] AS [Button_ID], 
+    [Menu_Button].[OrderBy] AS [OrderBy]
+    FROM [Base].[Menu_Button] AS [Menu_Button]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Message" EntityType="Self.Message" store:Type="Tables" store:Schema="Base">
+            <DefiningQuery>SELECT 
+    [Message].[MessageID] AS [MessageID], 
+    [Message].[MessageTitle] AS [MessageTitle], 
+    [Message].[MessageText] AS [MessageText], 
+    [Message].[SendUser] AS [SendUser], 
+    [Message].[RecUser] AS [RecUser], 
+    [Message].[SendTime] AS [SendTime], 
+    [Message].[ExpirationTime] AS [ExpirationTime], 
+    [Message].[IsSendEmail] AS [IsSendEmail], 
+    [Message].[SendEmailState] AS [SendEmailState]
+    FROM [Base].[Message] AS [Message]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Role" EntityType="Self.Role" store:Type="Tables" store:Schema="Base">
+            <DefiningQuery>SELECT 
+    [Role].[Role_ID] AS [Role_ID], 
+    [Role].[Role_Name] AS [Role_Name], 
+    [Role].[Role_Description] AS [Role_Description], 
+    [Role].[Create_Time] AS [Create_Time], 
+    [Role].[Update_Time] AS [Update_Time]
+    FROM [Base].[Role] AS [Role]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Role_Button" EntityType="Self.Role_Button" store:Type="Tables" store:Schema="Base">
+            <DefiningQuery>SELECT 
+    [Role_Button].[ID] AS [ID], 
+    [Role_Button].[Role_ID] AS [Role_ID], 
+    [Role_Button].[Menu_ID] AS [Menu_ID], 
+    [Role_Button].[Button_ID] AS [Button_ID]
+    FROM [Base].[Role_Button] AS [Role_Button]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Role_Menu" EntityType="Self.Role_Menu" store:Type="Tables" store:Schema="Base">
+            <DefiningQuery>SELECT 
+    [Role_Menu].[RoleMenu_ID] AS [RoleMenu_ID], 
+    [Role_Menu].[Role_ID] AS [Role_ID], 
+    [Role_Menu].[Menu_ID] AS [Menu_ID]
+    FROM [Base].[Role_Menu] AS [Role_Menu]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SystemInfo" EntityType="Self.SystemInfo" store:Type="Tables" store:Schema="Base">
+            <DefiningQuery>SELECT 
+    [SystemInfo].[System_ID] AS [System_ID], 
+    [SystemInfo].[System_Title] AS [System_Title], 
+    [SystemInfo].[System_Version] AS [System_Version], 
+    [SystemInfo].[System_Copyright] AS [System_Copyright], 
+    [SystemInfo].[IsValidCode] AS [IsValidCode]
+    FROM [Base].[SystemInfo] AS [SystemInfo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="User_Message" EntityType="Self.User_Message" store:Type="Tables" store:Schema="Base">
+            <DefiningQuery>SELECT 
+    [User_Message].[ID] AS [ID], 
+    [User_Message].[MessageID] AS [MessageID], 
+    [User_Message].[UserID] AS [UserID], 
+    [User_Message].[IsRead] AS [IsRead]
+    FROM [Base].[User_Message] AS [User_Message]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="User_Role" EntityType="Self.User_Role" store:Type="Tables" store:Schema="Base">
+            <DefiningQuery>SELECT 
+    [User_Role].[ID] AS [ID], 
+    [User_Role].[User_ID] AS [User_ID], 
+    [User_Role].[Role_ID] AS [Role_ID]
+    FROM [Base].[User_Role] AS [User_Role]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UserInfomation" EntityType="Self.UserInfomation" store:Type="Tables" store:Schema="Base">
+            <DefiningQuery>SELECT 
+    [UserInfomation].[User_ID] AS [User_ID], 
+    [UserInfomation].[User_Name] AS [User_Name], 
+    [UserInfomation].[User_Password] AS [User_Password], 
+    [UserInfomation].[User_Reallyname] AS [User_Reallyname], 
+    [UserInfomation].[MobilePhone] AS [MobilePhone], 
+    [UserInfomation].[Email] AS [Email], 
+    [UserInfomation].[HeadPortrait] AS [HeadPortrait], 
+    [UserInfomation].[Department_ID] AS [Department_ID], 
+    [UserInfomation].[IsEnable] AS [IsEnable], 
+    [UserInfomation].[Create_Time] AS [Create_Time], 
+    [UserInfomation].[Update_Time] AS [Update_Time], 
+    [UserInfomation].[Remark] AS [Remark]
+    FROM [Base].[UserInfomation] AS [UserInfomation]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ActiveCondition" EntityType="Self.ActiveCondition" store:Type="Tables" store:Schema="Flow">
+            <DefiningQuery>SELECT 
+    [ActiveCondition].[ConditionId] AS [ConditionId], 
+    [ActiveCondition].[ActiveId] AS [ActiveId], 
+    [ActiveCondition].[FlowId] AS [FlowId], 
+    [ActiveCondition].[ConditionIndex] AS [ConditionIndex], 
+    [ActiveCondition].[Field] AS [Field], 
+    [ActiveCondition].[Compare] AS [Compare], 
+    [ActiveCondition].[CompareValue] AS [CompareValue], 
+    [ActiveCondition].[Logic] AS [Logic], 
+    [ActiveCondition].[Combine] AS [Combine]
+    FROM [Flow].[ActiveCondition] AS [ActiveCondition]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FlowActive" EntityType="Self.FlowActive" store:Type="Tables" store:Schema="Flow">
+            <DefiningQuery>SELECT 
+    [FlowActive].[ActiveId] AS [ActiveId], 
+    [FlowActive].[FlowId] AS [FlowId], 
+    [FlowActive].[type] AS [type], 
+    [FlowActive].[Viewfrom] AS [Viewfrom], 
+    [FlowActive].[Viewto] AS [Viewto], 
+    [FlowActive].[name] AS [name], 
+    [FlowActive].[FlowLineName] AS [FlowLineName], 
+    [FlowActive].[alt] AS [alt]
+    FROM [Flow].[FlowActive] AS [FlowActive]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FlowApprove" EntityType="Self.FlowApprove" store:Type="Tables" store:Schema="Flow">
+            <DefiningQuery>SELECT 
+    [FlowApprove].[ApproveId] AS [ApproveId], 
+    [FlowApprove].[FlowInfoId] AS [FlowInfoId], 
+    [FlowApprove].[ApproveUser] AS [ApproveUser], 
+    [FlowApprove].[FlowStepId] AS [FlowStepId], 
+    [FlowApprove].[ApproveResult] AS [ApproveResult], 
+    [FlowApprove].[ApproveRemark] AS [ApproveRemark], 
+    [FlowApprove].[ApproveTime] AS [ApproveTime], 
+    [FlowApprove].[ReallyApproveUser] AS [ReallyApproveUser]
+    FROM [Flow].[FlowApprove] AS [FlowApprove]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FlowInfo" EntityType="Self.FlowInfo" store:Type="Tables" store:Schema="Flow">
+            <DefiningQuery>SELECT 
+    [FlowInfo].[FlowInfoId] AS [FlowInfoId], 
+    [FlowInfo].[FlowId] AS [FlowId], 
+    [FlowInfo].[FormId] AS [FormId], 
+    [FlowInfo].[FormInfoId] AS [FormInfoId], 
+    [FlowInfo].[UserId] AS [UserId], 
+    [FlowInfo].[FlowStepId] AS [FlowStepId], 
+    [FlowInfo].[FlowInfoState] AS [FlowInfoState], 
+    [FlowInfo].[CreateTime] AS [CreateTime]
+    FROM [Flow].[FlowInfo] AS [FlowInfo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FlowStep" EntityType="Self.FlowStep" store:Type="Tables" store:Schema="Flow">
+            <DefiningQuery>SELECT 
+    [FlowStep].[StepId] AS [StepId], 
+    [FlowStep].[FlowId] AS [FlowId], 
+    [FlowStep].[name] AS [name], 
+    [FlowStep].[Viewleft] AS [Viewleft], 
+    [FlowStep].[Viewtop] AS [Viewtop], 
+    [FlowStep].[type] AS [type], 
+    [FlowStep].[width] AS [width], 
+    [FlowStep].[height] AS [height], 
+    [FlowStep].[alt] AS [alt], 
+    [FlowStep].[stepUser] AS [stepUser], 
+    [FlowStep].[stepName] AS [stepName], 
+    [FlowStep].[flowNodeName] AS [flowNodeName], 
+    [FlowStep].[remark] AS [remark]
+    FROM [Flow].[FlowStep] AS [FlowStep]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WorkFlow" EntityType="Self.WorkFlow" store:Type="Tables" store:Schema="Flow">
+            <DefiningQuery>SELECT 
+    [WorkFlow].[FlowID] AS [FlowID], 
+    [WorkFlow].[FlowSort] AS [FlowSort], 
+    [WorkFlow].[FlowName] AS [FlowName], 
+    [WorkFlow].[FormID] AS [FormID], 
+    [WorkFlow].[remark] AS [remark], 
+    [WorkFlow].[CreateUser] AS [CreateUser], 
+    [WorkFlow].[CreateTime] AS [CreateTime]
+    FROM [Flow].[WorkFlow] AS [WorkFlow]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ElementInfo" EntityType="Self.ElementInfo" store:Type="Tables" store:Schema="Form">
+            <DefiningQuery>SELECT 
+    [ElementInfo].[ElementId] AS [ElementId], 
+    [ElementInfo].[ElementText] AS [ElementText], 
+    [ElementInfo].[ElementIoc] AS [ElementIoc], 
+    [ElementInfo].[ElementType] AS [ElementType]
+    FROM [Form].[ElementInfo] AS [ElementInfo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Form_Element" EntityType="Self.Form_Element" store:Type="Tables" store:Schema="Form">
+            <DefiningQuery>SELECT 
+    [Form_Element].[FEId] AS [FEId], 
+    [Form_Element].[FormId] AS [FormId], 
+    [Form_Element].[ElementId] AS [ElementId], 
+    [Form_Element].[FieldIden] AS [FieldIden], 
+    [Form_Element].[ElementLable] AS [ElementLable], 
+    [Form_Element].[ElementValid] AS [ElementValid], 
+    [Form_Element].[ElementHeight] AS [ElementHeight], 
+    [Form_Element].[ElementDefValue] AS [ElementDefValue], 
+    [Form_Element].[DataDictionary] AS [DataDictionary], 
+    [Form_Element].[ElementFormatType] AS [ElementFormatType], 
+    [Form_Element].[ElementOrder] AS [ElementOrder]
+    FROM [Form].[Form_Element] AS [Form_Element]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FormInfo" EntityType="Self.FormInfo" store:Type="Tables" store:Schema="Form">
+            <DefiningQuery>SELECT 
+    [FormInfo].[FormId] AS [FormId], 
+    [FormInfo].[FormName] AS [FormName], 
+    [FormInfo].[DBName] AS [DBName], 
+    [FormInfo].[FieldKey] AS [FieldKey], 
+    [FormInfo].[remark] AS [remark], 
+    [FormInfo].[CreatTime] AS [CreatTime]
+    FROM [Form].[FormInfo] AS [FormInfo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="LeaveInfo" EntityType="Self.LeaveInfo" store:Type="Tables" store:Schema="Test">
+            <DefiningQuery>SELECT 
+    [LeaveInfo].[leaveId] AS [leaveId], 
+    [LeaveInfo].[leavePeople] AS [leavePeople], 
+    [LeaveInfo].[leaveDepartment] AS [leaveDepartment], 
+    [LeaveInfo].[leaveDays] AS [leaveDays], 
+    [LeaveInfo].[leaveStartDate] AS [leaveStartDate], 
+    [LeaveInfo].[leaveEndDate] AS [leaveEndDate], 
+    [LeaveInfo].[remark] AS [remark]
+    FROM [Test].[LeaveInfo] AS [LeaveInfo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="New" EntityType="Self.New" store:Type="Tables" store:Schema="Test">
+            <DefiningQuery>SELECT 
+    [New].[NewId] AS [NewId], 
+    [New].[NewTitle] AS [NewTitle], 
+    [New].[NewContent] AS [NewContent], 
+    [New].[NewAuthor] AS [NewAuthor], 
+    [New].[CreateTime] AS [CreateTime]
+    FROM [Test].[New] AS [New]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DDitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Button">
+          <Key>
+            <PropertyRef Name="Button_ID" />
+            <PropertyRef Name="Button_Name" />
+          </Key>
+          <Property Name="Button_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Button_OpID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Button_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Button_Operation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Button_Magic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Button_Describe" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Time" Type="DateTime" Precision="3" />
+          <Property Name="Update_Time" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Dictionary">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="DicCategoryID" />
+            <PropertyRef Name="DicValue" />
+            <PropertyRef Name="Enabled" />
+            <PropertyRef Name="Create_Time" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DicCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="DicValue" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="Create_Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Update_Time" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="DictionaryCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Category" />
+            <PropertyRef Name="Enabled" />
+            <PropertyRef Name="Create_Time" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="Create_Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Update_Time" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="LoginLog">
+          <Key>
+            <PropertyRef Name="Login_ID" />
+            <PropertyRef Name="Login_Name" />
+            <PropertyRef Name="Login_Nicker" />
+            <PropertyRef Name="Login_IP" />
+            <PropertyRef Name="Login_Time" />
+          </Key>
+          <Property Name="Login_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login_Nicker" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login_IP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login_Time" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Menu_ID" />
+            <PropertyRef Name="Menu_Name" />
+            <PropertyRef Name="Menu_Order" />
+          </Key>
+          <Property Name="Menu_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Menu_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Menu_Url" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Menu_ParentID" Type="Int32" />
+          <Property Name="Menu_Order" Type="Int32" Nullable="false" />
+          <Property Name="Menu_Icon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsVisible" Type="Int32" />
+          <Property Name="Create_Time" Type="DateTime" Precision="3" />
+          <Property Name="Update_Time" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Menu_Button">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Menu_ID" Type="Int32" />
+          <Property Name="Button_ID" Type="Int32" />
+          <Property Name="OrderBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageID" />
+            <PropertyRef Name="MessageTitle" />
+            <PropertyRef Name="MessageText" />
+            <PropertyRef Name="SendUser" />
+            <PropertyRef Name="RecUser" />
+            <PropertyRef Name="SendTime" />
+            <PropertyRef Name="IsSendEmail" />
+          </Key>
+          <Property Name="MessageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MessageText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SendUser" Type="Int32" Nullable="false" />
+          <Property Name="RecUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SendTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpirationTime" Type="DateTime" Precision="3" />
+          <Property Name="IsSendEmail" Type="Boolean" Nullable="false" />
+          <Property Name="SendEmailState" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+            <PropertyRef Name="Role_Name" />
+            <PropertyRef Name="Create_Time" />
+          </Key>
+          <Property Name="Role_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role_Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Update_Time" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Role_Button">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role_ID" Type="Int32" />
+          <Property Name="Menu_ID" Type="Int32" />
+          <Property Name="Button_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Role_Menu">
+          <Key>
+            <PropertyRef Name="RoleMenu_ID" />
+            <PropertyRef Name="Role_ID" />
+            <PropertyRef Name="Menu_ID" />
+          </Key>
+          <Property Name="RoleMenu_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role_ID" Type="Int32" Nullable="false" />
+          <Property Name="Menu_ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SystemInfo">
+          <Key>
+            <PropertyRef Name="System_ID" />
+          </Key>
+          <Property Name="System_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="System_Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="System_Version" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="System_Copyright" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsValidCode" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="User_Message">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="MessageID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="IsRead" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="IsRead" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Role">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="User_ID" />
+            <PropertyRef Name="Role_ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="Role_ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfomation">
+          <Key>
+            <PropertyRef Name="User_ID" />
+            <PropertyRef Name="User_Name" />
+            <PropertyRef Name="User_Password" />
+            <PropertyRef Name="User_Reallyname" />
+            <PropertyRef Name="Department_ID" />
+            <PropertyRef Name="IsEnable" />
+            <PropertyRef Name="Create_Time" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="User_Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="User_Reallyname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MobilePhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HeadPortrait" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Department_ID" Type="Int32" Nullable="false" />
+          <Property Name="IsEnable" Type="Boolean" Nullable="false" />
+          <Property Name="Create_Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Update_Time" Type="DateTime" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ActiveCondition">
+          <Key>
+            <PropertyRef Name="ConditionId" />
+          </Key>
+          <Property Name="ConditionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActiveId" Type="Int32" />
+          <Property Name="FlowId" Type="Int32" />
+          <Property Name="ConditionIndex" Type="Int32" />
+          <Property Name="Field" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Compare" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CompareValue" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Logic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Combine" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FlowActive">
+          <Key>
+            <PropertyRef Name="ActiveId" />
+            <PropertyRef Name="FlowId" />
+          </Key>
+          <Property Name="ActiveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FlowId" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Viewfrom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Viewto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FlowLineName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="alt" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="FlowApprove">
+          <Key>
+            <PropertyRef Name="ApproveId" />
+          </Key>
+          <Property Name="ApproveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FlowInfoId" Type="Int32" />
+          <Property Name="ApproveUser" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FlowStepId" Type="Int32" />
+          <Property Name="ApproveResult" Type="Int32" />
+          <Property Name="ApproveRemark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ApproveTime" Type="DateTime" Precision="3" />
+          <Property Name="ReallyApproveUser" Type="Int32" />
+        </EntityType>
+        <EntityType Name="FlowInfo">
+          <Key>
+            <PropertyRef Name="FlowInfoId" />
+          </Key>
+          <Property Name="FlowInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FlowId" Type="Int32" />
+          <Property Name="FormId" Type="Int32" />
+          <Property Name="FormInfoId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="FlowStepId" Type="Int32" />
+          <Property Name="FlowInfoState" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="FlowStep">
+          <Key>
+            <PropertyRef Name="StepId" />
+          </Key>
+          <Property Name="StepId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FlowId" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Viewleft" Type="Int32" />
+          <Property Name="Viewtop" Type="Int32" />
+          <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="width" Type="Int32" />
+          <Property Name="height" Type="Int32" />
+          <Property Name="alt" Type="Boolean" />
+          <Property Name="stepUser" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="stepName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="flowNodeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="remark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="WorkFlow">
+          <Key>
+            <PropertyRef Name="FlowID" />
+          </Key>
+          <Property Name="FlowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FlowSort" Type="Int32" />
+          <Property Name="FlowName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FormID" Type="Int32" />
+          <Property Name="remark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreateUser" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ElementInfo">
+          <Key>
+            <PropertyRef Name="ElementId" />
+          </Key>
+          <Property Name="ElementId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ElementText" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ElementIoc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ElementType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Form_Element">
+          <Key>
+            <PropertyRef Name="FEId" />
+            <PropertyRef Name="FormId" />
+          </Key>
+          <Property Name="FEId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormId" Type="Int32" Nullable="false" />
+          <Property Name="ElementId" Type="Int32" />
+          <Property Name="FieldIden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ElementLable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ElementValid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ElementHeight" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ElementDefValue" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DataDictionary" Type="Int32" />
+          <Property Name="ElementFormatType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ElementOrder" Type="Int32" />
+        </EntityType>
+        <EntityType Name="FormInfo">
+          <Key>
+            <PropertyRef Name="FormId" />
+            <PropertyRef Name="FormName" />
+            <PropertyRef Name="DBName" />
+            <PropertyRef Name="FieldKey" />
+          </Key>
+          <Property Name="FormId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DBName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FieldKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CreatTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="LeaveInfo">
+          <Key>
+            <PropertyRef Name="leaveId" />
+          </Key>
+          <Property Name="leaveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="leavePeople" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="leaveDepartment" Type="Int32" />
+          <Property Name="leaveDays" Type="Int32" />
+          <Property Name="leaveStartDate" Type="DateTime" Precision="0" />
+          <Property Name="leaveEndDate" Type="DateTime" Precision="0" />
+          <Property Name="remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="New">
+          <Key>
+            <PropertyRef Name="NewId" />
+          </Key>
+          <Property Name="NewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NewContent" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NewAuthor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="DDitEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Button" EntityType="Self.Button" />
+          <EntitySet Name="Dictionary" EntityType="Self.Dictionary" />
+          <EntitySet Name="DictionaryCategory" EntityType="Self.DictionaryCategory" />
+          <EntitySet Name="LoginLog" EntityType="Self.LoginLog" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" />
+          <EntitySet Name="Menu_Button" EntityType="Self.Menu_Button" />
+          <EntitySet Name="Message" EntityType="Self.Message" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Role_Button" EntityType="Self.Role_Button" />
+          <EntitySet Name="Role_Menu" EntityType="Self.Role_Menu" />
+          <EntitySet Name="SystemInfo" EntityType="Self.SystemInfo" />
+          <EntitySet Name="User_Message" EntityType="Self.User_Message" />
+          <EntitySet Name="User_Role" EntityType="Self.User_Role" />
+          <EntitySet Name="UserInfomation" EntityType="Self.UserInfomation" />
+          <EntitySet Name="ActiveCondition" EntityType="Self.ActiveCondition" />
+          <EntitySet Name="FlowActive" EntityType="Self.FlowActive" />
+          <EntitySet Name="FlowApprove" EntityType="Self.FlowApprove" />
+          <EntitySet Name="FlowInfo" EntityType="Self.FlowInfo" />
+          <EntitySet Name="FlowStep" EntityType="Self.FlowStep" />
+          <EntitySet Name="WorkFlow" EntityType="Self.WorkFlow" />
+          <EntitySet Name="ElementInfo" EntityType="Self.ElementInfo" />
+          <EntitySet Name="Form_Element" EntityType="Self.Form_Element" />
+          <EntitySet Name="FormInfo" EntityType="Self.FormInfo" />
+          <EntitySet Name="LeaveInfo" EntityType="Self.LeaveInfo" />
+          <EntitySet Name="New" EntityType="Self.New" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DDitModelStoreContainer" CdmEntityContainer="DDitEntities">
+          <EntitySetMapping Name="Button">
+            <EntityTypeMapping TypeName="DDitModel.Button">
+              <MappingFragment StoreEntitySet="Button">
+                <ScalarProperty Name="Button_ID" ColumnName="Button_ID" />
+                <ScalarProperty Name="Button_OpID" ColumnName="Button_OpID" />
+                <ScalarProperty Name="Button_Name" ColumnName="Button_Name" />
+                <ScalarProperty Name="Button_Operation" ColumnName="Button_Operation" />
+                <ScalarProperty Name="Button_Magic" ColumnName="Button_Magic" />
+                <ScalarProperty Name="Button_Describe" ColumnName="Button_Describe" />
+                <ScalarProperty Name="Create_Time" ColumnName="Create_Time" />
+                <ScalarProperty Name="Update_Time" ColumnName="Update_Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dictionary">
+            <EntityTypeMapping TypeName="DDitModel.Dictionary">
+              <MappingFragment StoreEntitySet="Dictionary">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DicCategoryID" ColumnName="DicCategoryID" />
+                <ScalarProperty Name="DicValue" ColumnName="DicValue" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Create_Time" ColumnName="Create_Time" />
+                <ScalarProperty Name="Update_Time" ColumnName="Update_Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DictionaryCategory">
+            <EntityTypeMapping TypeName="DDitModel.DictionaryCategory">
+              <MappingFragment StoreEntitySet="DictionaryCategory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Create_Time" ColumnName="Create_Time" />
+                <ScalarProperty Name="Update_Time" ColumnName="Update_Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginLog">
+            <EntityTypeMapping TypeName="DDitModel.LoginLog">
+              <MappingFragment StoreEntitySet="LoginLog">
+                <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
+                <ScalarProperty Name="Login_Name" ColumnName="Login_Name" />
+                <ScalarProperty Name="Login_Nicker" ColumnName="Login_Nicker" />
+                <ScalarProperty Name="Login_IP" ColumnName="Login_IP" />
+                <ScalarProperty Name="Login_Time" ColumnName="Login_Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="DDitModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
+                <ScalarProperty Name="Menu_Name" ColumnName="Menu_Name" />
+                <ScalarProperty Name="Menu_Url" ColumnName="Menu_Url" />
+                <ScalarProperty Name="Menu_ParentID" ColumnName="Menu_ParentID" />
+                <ScalarProperty Name="Menu_Order" ColumnName="Menu_Order" />
+                <ScalarProperty Name="Menu_Icon" ColumnName="Menu_Icon" />
+                <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+                <ScalarProperty Name="Create_Time" ColumnName="Create_Time" />
+                <ScalarProperty Name="Update_Time" ColumnName="Update_Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu_Button">
+            <EntityTypeMapping TypeName="DDitModel.Menu_Button">
+              <MappingFragment StoreEntitySet="Menu_Button">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
+                <ScalarProperty Name="Button_ID" ColumnName="Button_ID" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Message">
+            <EntityTypeMapping TypeName="DDitModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+                <ScalarProperty Name="MessageTitle" ColumnName="MessageTitle" />
+                <ScalarProperty Name="MessageText" ColumnName="MessageText" />
+                <ScalarProperty Name="SendUser" ColumnName="SendUser" />
+                <ScalarProperty Name="RecUser" ColumnName="RecUser" />
+                <ScalarProperty Name="SendTime" ColumnName="SendTime" />
+                <ScalarProperty Name="ExpirationTime" ColumnName="ExpirationTime" />
+                <ScalarProperty Name="IsSendEmail" ColumnName="IsSendEmail" />
+                <ScalarProperty Name="SendEmailState" ColumnName="SendEmailState" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="DDitModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+                <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
+                <ScalarProperty Name="Role_Description" ColumnName="Role_Description" />
+                <ScalarProperty Name="Create_Time" ColumnName="Create_Time" />
+                <ScalarProperty Name="Update_Time" ColumnName="Update_Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role_Button">
+            <EntityTypeMapping TypeName="DDitModel.Role_Button">
+              <MappingFragment StoreEntitySet="Role_Button">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+                <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
+                <ScalarProperty Name="Button_ID" ColumnName="Button_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role_Menu">
+            <EntityTypeMapping TypeName="DDitModel.Role_Menu">
+              <MappingFragment StoreEntitySet="Role_Menu">
+                <ScalarProperty Name="RoleMenu_ID" ColumnName="RoleMenu_ID" />
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+                <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemInfo">
+            <EntityTypeMapping TypeName="DDitModel.SystemInfo">
+              <MappingFragment StoreEntitySet="SystemInfo">
+                <ScalarProperty Name="System_ID" ColumnName="System_ID" />
+                <ScalarProperty Name="System_Title" ColumnName="System_Title" />
+                <ScalarProperty Name="System_Version" ColumnName="System_Version" />
+                <ScalarProperty Name="System_Copyright" ColumnName="System_Copyright" />
+                <ScalarProperty Name="IsValidCode" ColumnName="IsValidCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Message">
+            <EntityTypeMapping TypeName="DDitModel.User_Message">
+              <MappingFragment StoreEntitySet="User_Message">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Role">
+            <EntityTypeMapping TypeName="DDitModel.User_Role">
+              <MappingFragment StoreEntitySet="User_Role">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfomation">
+            <EntityTypeMapping TypeName="DDitModel.UserInfomation">
+              <MappingFragment StoreEntitySet="UserInfomation">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="User_Password" ColumnName="User_Password" />
+                <ScalarProperty Name="User_Reallyname" ColumnName="User_Reallyname" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="HeadPortrait" ColumnName="HeadPortrait" />
+                <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />
+                <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
+                <ScalarProperty Name="Create_Time" ColumnName="Create_Time" />
+                <ScalarProperty Name="Update_Time" ColumnName="Update_Time" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActiveCondition">
+            <EntityTypeMapping TypeName="DDitModel.ActiveCondition">
+              <MappingFragment StoreEntitySet="ActiveCondition">
+                <ScalarProperty Name="ConditionId" ColumnName="ConditionId" />
+                <ScalarProperty Name="ActiveId" ColumnName="ActiveId" />
+                <ScalarProperty Name="FlowId" ColumnName="FlowId" />
+                <ScalarProperty Name="ConditionIndex" ColumnName="ConditionIndex" />
+                <ScalarProperty Name="Field" ColumnName="Field" />
+                <ScalarProperty Name="Compare" ColumnName="Compare" />
+                <ScalarProperty Name="CompareValue" ColumnName="CompareValue" />
+                <ScalarProperty Name="Logic" ColumnName="Logic" />
+                <ScalarProperty Name="Combine" ColumnName="Combine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FlowActive">
+            <EntityTypeMapping TypeName="DDitModel.FlowActive">
+              <MappingFragment StoreEntitySet="FlowActive">
+                <ScalarProperty Name="ActiveId" ColumnName="ActiveId" />
+                <ScalarProperty Name="FlowId" ColumnName="FlowId" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="Viewfrom" ColumnName="Viewfrom" />
+                <ScalarProperty Name="Viewto" ColumnName="Viewto" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="FlowLineName" ColumnName="FlowLineName" />
+                <ScalarProperty Name="alt" ColumnName="alt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FlowApprove">
+            <EntityTypeMapping TypeName="DDitModel.FlowApprove">
+              <MappingFragment StoreEntitySet="FlowApprove">
+                <ScalarProperty Name="ApproveId" ColumnName="ApproveId" />
+                <ScalarProperty Name="FlowInfoId" ColumnName="FlowInfoId" />
+                <ScalarProperty Name="ApproveUser" ColumnName="ApproveUser" />
+                <ScalarProperty Name="FlowStepId" ColumnName="FlowStepId" />
+                <ScalarProperty Name="ApproveResult" ColumnName="ApproveResult" />
+                <ScalarProperty Name="ApproveRemark" ColumnName="ApproveRemark" />
+                <ScalarProperty Name="ApproveTime" ColumnName="ApproveTime" />
+                <ScalarProperty Name="ReallyApproveUser" ColumnName="ReallyApproveUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FlowInfo">
+            <EntityTypeMapping TypeName="DDitModel.FlowInfo">
+              <MappingFragment StoreEntitySet="FlowInfo">
+                <ScalarProperty Name="FlowInfoId" ColumnName="FlowInfoId" />
+                <ScalarProperty Name="FlowId" ColumnName="FlowId" />
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="FormInfoId" ColumnName="FormInfoId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FlowStepId" ColumnName="FlowStepId" />
+                <ScalarProperty Name="FlowInfoState" ColumnName="FlowInfoState" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FlowStep">
+            <EntityTypeMapping TypeName="DDitModel.FlowStep">
+              <MappingFragment StoreEntitySet="FlowStep">
+                <ScalarProperty Name="StepId" ColumnName="StepId" />
+                <ScalarProperty Name="FlowId" ColumnName="FlowId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Viewleft" ColumnName="Viewleft" />
+                <ScalarProperty Name="Viewtop" ColumnName="Viewtop" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="alt" ColumnName="alt" />
+                <ScalarProperty Name="stepUser" ColumnName="stepUser" />
+                <ScalarProperty Name="stepName" ColumnName="stepName" />
+                <ScalarProperty Name="flowNodeName" ColumnName="flowNodeName" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkFlow">
+            <EntityTypeMapping TypeName="DDitModel.WorkFlow">
+              <MappingFragment StoreEntitySet="WorkFlow">
+                <ScalarProperty Name="FlowID" ColumnName="FlowID" />
+                <ScalarProperty Name="FlowSort" ColumnName="FlowSort" />
+                <ScalarProperty Name="FlowName" ColumnName="FlowName" />
+                <ScalarProperty Name="FormID" ColumnName="FormID" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ElementInfo">
+            <EntityTypeMapping TypeName="DDitModel.ElementInfo">
+              <MappingFragment StoreEntitySet="ElementInfo">
+                <ScalarProperty Name="ElementId" ColumnName="ElementId" />
+                <ScalarProperty Name="ElementText" ColumnName="ElementText" />
+                <ScalarProperty Name="ElementIoc" ColumnName="ElementIoc" />
+                <ScalarProperty Name="ElementType" ColumnName="ElementType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Form_Element">
+            <EntityTypeMapping TypeName="DDitModel.Form_Element">
+              <MappingFragment StoreEntitySet="Form_Element">
+                <ScalarProperty Name="FEId" ColumnName="FEId" />
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="ElementId" ColumnName="ElementId" />
+                <ScalarProperty Name="FieldIden" ColumnName="FieldIden" />
+                <ScalarProperty Name="ElementLable" ColumnName="ElementLable" />
+                <ScalarProperty Name="ElementValid" ColumnName="ElementValid" />
+                <ScalarProperty Name="ElementHeight" ColumnName="ElementHeight" />
+                <ScalarProperty Name="ElementDefValue" ColumnName="ElementDefValue" />
+                <ScalarProperty Name="DataDictionary" ColumnName="DataDictionary" />
+                <ScalarProperty Name="ElementFormatType" ColumnName="ElementFormatType" />
+                <ScalarProperty Name="ElementOrder" ColumnName="ElementOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormInfo">
+            <EntityTypeMapping TypeName="DDitModel.FormInfo">
+              <MappingFragment StoreEntitySet="FormInfo">
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="FormName" ColumnName="FormName" />
+                <ScalarProperty Name="DBName" ColumnName="DBName" />
+                <ScalarProperty Name="FieldKey" ColumnName="FieldKey" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="CreatTime" ColumnName="CreatTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveInfo">
+            <EntityTypeMapping TypeName="DDitModel.LeaveInfo">
+              <MappingFragment StoreEntitySet="LeaveInfo">
+                <ScalarProperty Name="leaveId" ColumnName="leaveId" />
+                <ScalarProperty Name="leavePeople" ColumnName="leavePeople" />
+                <ScalarProperty Name="leaveDepartment" ColumnName="leaveDepartment" />
+                <ScalarProperty Name="leaveDays" ColumnName="leaveDays" />
+                <ScalarProperty Name="leaveStartDate" ColumnName="leaveStartDate" />
+                <ScalarProperty Name="leaveEndDate" ColumnName="leaveEndDate" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="New">
+            <EntityTypeMapping TypeName="DDitModel.New">
+              <MappingFragment StoreEntitySet="New">
+                <ScalarProperty Name="NewId" ColumnName="NewId" />
+                <ScalarProperty Name="NewTitle" ColumnName="NewTitle" />
+                <ScalarProperty Name="NewContent" ColumnName="NewContent" />
+                <ScalarProperty Name="NewAuthor" ColumnName="NewAuthor" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
