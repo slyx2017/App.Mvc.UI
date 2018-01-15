@@ -26,13 +26,13 @@ layui.use(['element','jquery'],function(){
  * @param tabId 选项卡id
  */
 function addTab(tabTitle, tabUrl, tabId) {
-    var url = ".." + tabUrl;
+    //var url = ".." + tabUrl;
     if ($(".layui-tab-title li[lay-id=" + tabId + "]").length > 0) {
         element.tabChange('tab-switch', tabId);
     }else{
         element.tabAdd('tab-switch', {
             title: tabTitle
-            , content: '<iframe src=' + url + ' width="100%" style="min-height: 500px;" frameborder="0" scrolling="auto" onload="setIframeHeight(this)"></iframe>' // 选项卡内容，支持传入html
+            , content: '<iframe src=' + tabUrl + ' width="100%" style="min-height: 500px;" frameborder="0" scrolling="auto" onload="setIframeHeight(this)"></iframe>' // 选项卡内容，支持传入html
             ,id: tabId //选项卡标题的lay-id属性值
         });
         element.tabChange('tab-switch', tabId); //切换到新增的tab上

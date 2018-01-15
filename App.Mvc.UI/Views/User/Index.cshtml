@@ -1,91 +1,95 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
-
-<div class="demoTable">
-    搜索用户名：
-    <div class="layui-inline">
-        <input class="layui-input" name="UserName" id="demoReload" autocomplete="off">
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+   
+</head>
+<body class="layui-layout-body">
+    <div class="demoTable">
+        搜索用户名：
+        <div class="layui-inline">
+            <input class="layui-input" name="UserName" id="demoReload" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload">搜索</button>
     </div>
-    <button class="layui-btn" data-type="reload">搜索</button>
-</div>
 
-<table class="layui-hide" id="LAY_table_user" lay-filter="user"></table>
+    <table class="layui-hide" id="LAY_table_user" lay-filter="user"></table>
 
-@section scripts{
-    <script>
-layui.use('table', function(){
-  var table = layui.table;
+    <script src="~/Content/layui/layui.js"></script>
+        <script>
+            layui.use('table', function () {
+                var table = layui.table;
 
-  //方法级渲染
-  table.render({
-    elem: '#LAY_table_user'
-    ,url: 'GetList/'
-    ,cols: [[
-      {checkbox: true, fixed: true}
-      ,{field:'User_ID', title: 'ID', width:80, sort: true, fixed: true}
-      , { field: 'User_Name', title: '用户名'}
-      , { field: 'User_Reallyname', title: '真实姓名', sort: true }
-      , { field: 'MobilePhone', title: '手机' }
-      , { field: 'Email', title: '邮箱' }
-      , { field: 'Department_ID', title: '部门', sort: true}
-      , { field: 'IsEnable', title: '是否启用' }
-      , {
-          field: 'Create_Time', title: '创建时间', sort: true, templet: function (d) {
-              return DateFormatAll(d.Create_Time)
-          }
-      }
-      , { field: 'Remark', title: '备注'}
-    ]]
-    ,id: 'testReload'
-    ,page: true
-    , height: 'full-248'
+                //方法级渲染
+                table.render({
+                    elem: '#LAY_table_user'
+                  , url: 'GetList/'
+                  , cols: [[
+                    { checkbox: true, fixed: true }
+                    , { field: 'User_ID', title: 'ID', width: 80, sort: true, fixed: true }
+                    , { field: 'User_Name', title: '用户名' }
+                    , { field: 'User_Reallyname', title: '真实姓名', sort: true }
+                    , { field: 'MobilePhone', title: '手机' }
+                    , { field: 'Email', title: '邮箱' }
+                    , { field: 'Department_ID', title: '部门', sort: true }
+                    , { field: 'IsEnable', title: '是否启用' }
+                    , {
+                        field: 'Create_Time', title: '创建时间', sort: true, templet: function (d) {
+                            return DateFormatAll(d.Create_Time)
+                        }
+                    }
+                    , { field: 'Remark', title: '备注' }
+                  ]]
+                  , id: 'testReload'
+                  , page: true
+                });
 
-  });
+                var $ = layui.$, active = {
+                    reload: function () {
+                        var demoReload = $('#demoReload');
 
-  var $ = layui.$, active = {
-    reload: function(){
-      var demoReload = $('#demoReload');
+                        //执行重载
+                        table.reload('testReload', {
+                            page: {
+                                curr: 1 //重新从第 1 页开始
+                            }
+                          , where: {
+                              UserName: demoReload.val()
+                          }
+                        });
+                    }
+                };
 
-      //执行重载
-      table.reload('testReload', {
-        page: {
-          curr: 1 //重新从第 1 页开始
-        }
-        ,where: {
-           UserName: demoReload.val()
-        }
-      });
-    }
-  };
+                $('.demoTable .layui-btn').on('click', function () {
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+            });
 
-  $('.demoTable .layui-btn').on('click', function(){
-    var type = $(this).data('type');
-    active[type] ? active[type].call(this) : '';
-  });
-});
+            function DateFormatAll(cellval) {
 
-function DateFormatAll(cellval) {
+                var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
 
-    var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
+                var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
 
-    var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
 
-    var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                var HH = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
 
-    var HH = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+                var mm = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
 
-    var mm = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+                var ss = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
 
-    var ss = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+                var time = HH + ":" + mm + ":" + ss;
 
-    var time=HH+":"+mm+":"+ss;
+                return date.getFullYear() + "-" + month + "-" + currentDate + " " + time;
 
-    return date.getFullYear() + "-" + month + "-" + currentDate + " " + time;
-
-}
-    </script>
-}
-
+            }
+        </script>
+</body>
+</html>
